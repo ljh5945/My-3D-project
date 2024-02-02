@@ -16,7 +16,7 @@ public class CampFire : MonoBehaviour
 
     void DealDamage()
     {
-        for(int i = 0; i < thingsToDamage.Count; i++)
+        for (int i = 0; i < thingsToDamage.Count; i++)
         {
             thingsToDamage[i].TakePhysicalDamage(damage);
         }
@@ -24,7 +24,7 @@ public class CampFire : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out IDamagable damagable))
+        if (other.gameObject.TryGetComponent(out IDamagable damagable))
         {
             thingsToDamage.Add(damagable);
         }
@@ -37,4 +37,5 @@ public class CampFire : MonoBehaviour
             thingsToDamage.Remove(damagable);
         }
     }
+
 }

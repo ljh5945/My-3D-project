@@ -10,15 +10,14 @@ public interface IDamagable
 }
 
 [System.Serializable]
-
 public class Condition
 {
     [HideInInspector]
     public float curValue;
     public float maxValue;
     public float startValue;
-    public float regenValue;
-    public float decayValue;
+    public float regenRate;
+    public float decayRate;
     public Image uiBar;
 
     public void Add(float amount)
@@ -39,7 +38,6 @@ public class Condition
 }
 
 
-
 public class PlayerConditions : MonoBehaviour, IDamagable
 {
     public Condition health;
@@ -50,7 +48,6 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 
     public UnityEvent onTakeDamage;
 
-    // Start is called before the first frame update
     void Start()
     {
         health.curValue = health.startValue;
@@ -61,10 +58,10 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     // Update is called once per frame
     void Update()
     {
-        hunger.Subtract(hunger.decayValue * Time.deltaTime);
-        stamina.Add(stamina.regenValue * Time.deltaTime);
+        hunger.Subtract(hunger.decayRate * Time.deltaTime);
+        stamina.Add(stamina.regenRate * Time.deltaTime);
 
-        if(hunger.curValue == 0.0f)
+        if (hunger.curValue == 0.0f)
             health.Subtract(noHungerHealthDecay * Time.deltaTime);
 
         if (health.curValue == 0.0f)
@@ -96,7 +93,7 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 
     public void Die()
     {
-
+        Debug.Log("플레이어가 죽었다.");
     }
 
     public void TakePhysicalDamage(int damageAmount)

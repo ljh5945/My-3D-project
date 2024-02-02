@@ -23,7 +23,7 @@ public class DayNightCycle : MonoBehaviour
 
     [Header("Other Lighting")]
     public AnimationCurve lightingIntensityMultiplier;
-    public AnimationCurve reflectionIntensityMultipler;
+    public AnimationCurve reflectionIntensityMultiplier;
 
     private void Start()
     {
@@ -39,9 +39,9 @@ public class DayNightCycle : MonoBehaviour
         UpdateLighting(moon, moonColor, moonIntensity);
 
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
-        RenderSettings.reflectionIntensity = reflectionIntensityMultipler.Evaluate(time);
-    }
+        RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
 
+    }
 
     void UpdateLighting(Light lightSource, Gradient colorGradiant, AnimationCurve intensityCurve)
     {
@@ -52,7 +52,7 @@ public class DayNightCycle : MonoBehaviour
         lightSource.intensity = intensity;
 
         GameObject go = lightSource.gameObject;
-        if(lightSource.intensity == 0 && go.activeInHierarchy)
+        if (lightSource.intensity == 0 && go.activeInHierarchy)
             go.SetActive(false);
         else if (lightSource.intensity > 0 && !go.activeInHierarchy)
             go.SetActive(true);
